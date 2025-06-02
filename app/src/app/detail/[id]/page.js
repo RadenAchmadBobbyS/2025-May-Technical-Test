@@ -60,42 +60,40 @@ export default async function DetailPage(props) {
   return (
     <div className="relative min-h-screens">
       {/* Hero Section */}
-      <div className="relative w-full h-[340px] md:h-[420px] flex items-end justify-center overflow-hidden mb-5">
+      <div className="relative w-full h-[260px] md:h-[420px] flex items-end justify-center overflow-hidden mb-5">
         <img
           src={post.meta?.image}
           alt={post.meta?.title}
-          className="absolute inset-20 w-full h-full object-cover object-center scale-110 blur-[7px] brightness-70 z-0"
+          className="absolute w-full h-full object-cover object-center scale-110 blur-[7px] brightness-70 z-0"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10" />
-        <div className="relative z-20 w-full max-w-3xl px-6 pb-10 flex flex-col gap-6 animate-fadeInUp">
-          <div className="flex flex-col items-center text-center">
-            <img
-              src="https://wisata.app/img/logo/pwa-icon.png"
-              alt="User Avatar"
-              className="w-28 h-28 rounded-full shadow-lg border-4 border-white/80 mb-3"
-            />
-            <h1 className="text-4xl md:text-4xl font-extrabold text-white drop-shadow-lg leading-tight mb-2">{post.meta?.title}</h1>
-            <p className="text-sm text-gray-200 mb-15">{date}</p>
-          </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
+        <div className="relative z-20 w-full max-w-2xl px-4 md:px-6 pb-8 md:pb-10 flex flex-col gap-4 md:gap-6 items-center text-center animate-fadeInUp mb-5">
+          <img
+            src="https://wisata.app/img/logo/pwa-icon.png"
+            alt="User Avatar"
+            className="w-20 h-20 md:w-28 md:h-28 rounded-full shadow-lg border-4 border-white/80 mb-2 md:mb-3 mx-auto"
+          />
+          <h1 className="text-2xl md:text-4xl font-extrabold text-white drop-shadow-lg leading-tight mb-1 md:mb-2 break-words">
+            {post.meta?.title}
+          </h1>
         </div>
       </div>
-      {/* Content Section - image left, content right */}
-      <div className="relative z-30 max-w-4xl mx-auto -mt-16 md:-mt-24 px-4">
-          <div className="flex flex-col gap-2 bg-white rounded-3xl shadow-[0_8px_24px_0_rgba(31,38,135,0.28),0_2px_8px_0_rgba(0,0,0,0.18)] p-6 md:p-10 border border-white/80">
+      {/* Content Section */}
+      <div className="relative z-30 max-w-4xl mx-auto -mt-12 md:-mt-20 px-2 md:px-4">
+        <div className="flex flex-col gap-4 md:gap-6 bg-white rounded-3xl shadow-[0_4px_16px_0_rgba(31,38,135,0.18),0_1px_4px_0_rgba(0,0,0,0.10)] p-4 md:p-10 border border-white/80">
           <div>
             <DetailBackButton variant="hero" />
           </div>
-            <div className="w-full flex flex-col justify-start">
-              <p className="text-lg md:text-2xl font-semibold mb-6 px-4 py-3 leading-relaxed tracking-wide text-justify">
-                {post.meta?.description}
-              </p>
-              {/* Share Button */}
-              <ShareButton shareUrl={shareUrl} shareTitle={shareTitle} />
-              <article className="prose prose-lg md:prose-xl max-w-none w-full bg-transparent text-gray-800 px-0 pb-8 text-justify space-y-6">
-                <DetailContentClient mdxSource={mdxSource} />
-              </article>
-            </div>
+          <div className="w-full flex flex-col justify-start">
+            <p className="text-base md:text-2xl font-semibold mb-4 md:mb-6 px-2 md:px-4 py-2 md:py-3 leading-relaxed tracking-wide text-justify">
+              {post.meta?.description}
+            </p>
+            <ShareButton shareUrl={shareUrl} shareTitle={shareTitle} />
+            <article className="prose prose-base md:prose-lg max-w-none w-full bg-transparent text-gray-800 px-0 pb-6 md:pb-8 text-justify space-y-4 md:space-y-6">
+              <DetailContentClient mdxSource={mdxSource} />
+            </article>
           </div>
+        </div>
       </div>
     </div>
   );

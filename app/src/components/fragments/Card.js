@@ -55,14 +55,16 @@ export default function Card({ feed: feedProp, initialIndex = 0, onNavigate }) {
 
   return (
     <div className="relative flex items-center justify-center my-1">
+      {/* Tombol navigasi untuk desktop (hanya tampil di md ke atas) */}
       <button
-        className="absolute left-50 z-10 p-4 rounded-full neumorphism-btn neumorphism-btn-lg hover:shadow-inner transition border border-gray-100"
+        className="hidden md:block absolute left-0 z-10 p-4 rounded-full neumorphism-btn neumorphism-btn-lg hover:shadow-inner transition border border-gray-100"
         aria-label="Previous"
         onClick={handlePrev}
       >
         <FaChevronLeft className="text-2xl" />
       </button>
 
+      {/* Card utama */}
       <div
         className={[
           "max-w-3xl w-full neumorphism-card bg-white rounded-2xl p-8",
@@ -78,6 +80,24 @@ export default function Card({ feed: feedProp, initialIndex = 0, onNavigate }) {
         onMouseEnter={e => e.currentTarget.classList.add('hovered-shadow')}
         onMouseLeave={e => e.currentTarget.classList.remove('hovered-shadow')}
       >
+        {/* Tombol navigasi untuk mobile (hanya tampil di bawah md) */}
+        <div className="flex md:hidden absolute top-3 right-3 gap-2 z-20">
+          <button
+            className="p-2 rounded-full neumorphism-btn neumorphism-btn-sm border border-gray-100 bg-white shadow"
+            aria-label="Previous"
+            onClick={e => { e.stopPropagation(); handlePrev(); }}
+          >
+            <FaChevronLeft className="text-lg" />
+          </button>
+          <button
+            className="p-2 rounded-full neumorphism-btn neumorphism-btn-sm border border-gray-100 bg-white shadow"
+            aria-label="Next"
+            onClick={e => { e.stopPropagation(); handleNext(); }}
+          >
+            <FaChevronRight className="text-lg" />
+          </button>
+        </div>
+
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
             <img
@@ -113,8 +133,9 @@ export default function Card({ feed: feedProp, initialIndex = 0, onNavigate }) {
         {selectedEmbed === 'twitter'  }
       </div>
 
+      {/* Tombol navigasi untuk desktop */}
       <button
-        className="absolute right-50 z-10 p-4 rounded-full neumorphism-btn neumorphism-btn-lg hover:shadow-inner transition border border-gray-100"
+        className="hidden md:block absolute right-0 z-10 p-4 rounded-full neumorphism-btn neumorphism-btn-lg hover:shadow-inner transition border border-gray-100"
         aria-label="Next"
         onClick={handleNext}
       >
