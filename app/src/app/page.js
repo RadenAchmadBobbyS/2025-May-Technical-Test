@@ -1,8 +1,8 @@
-import Card from "@/components/card";
+import Card from "@/components/fragments/Card";
 
 export default function Home() {
   return (
-    <div >
+    <div>
       <Card />
     </div>
   );

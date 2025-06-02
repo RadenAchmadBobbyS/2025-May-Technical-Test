@@ -1,16 +1,22 @@
 "use client"
 import { useLike } from "@/hooks/useLike";
-import LikeButton from "./likeButton";
+import { usePathname } from "next/navigation";
+import LikeButton from "./LikeButton";
 
 export default function Navbar() {
   const { liked, like, unlike, toggle } = useLike();
+  const pathname = usePathname();
+  const isDetail = pathname && pathname.startsWith("/detail/");
+  const logoUrl = isDetail
+    ? "https://wisata.app/img/logo/wisata_diary.png"
+    : "https://wisata.app/img/logo.png";
 
   return (
     <div className="bg-white shadow-inner py-4 px-6">
       <div className="flex items-center justify-between max-w-5xl mx-auto w-full">
         <div className="neumorphism">
           <img
-            src="https://wisata.app/img/logo.png"
+            src={logoUrl}
             alt="logo"
             width={150}
             className="h-auto"

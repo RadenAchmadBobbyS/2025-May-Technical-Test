@@ -22,7 +22,10 @@ export async function getDiaryFeed() {
     253782,
     177123,
   ]
-  ...
+  const queryParams = ids.map(id => `id=${id}`).join('&') + '&status=posted'
+  const url = `/cms/diary?${queryParams}`
+
+  return await apiClient(url);
 }
 
 /**
@@ -35,5 +38,6 @@ export async function getDiaryFeed() {
  * - `status` param must exist and have value of `'posted'`
  */
 export async function getDiaryContentById(id) {
-  ...
+  const url = `/cms/diary?id=${id}&status=posted`
+  return await apiClient(url)
 }

@@ -12,7 +12,10 @@ const CDN_WISATA_IMG_SIZE = {
  * TASK: Find available image size for Twitter CDN
  */
 const CDN_TWITTER_IMG_SIZE = {
-  ...
+    MINI: 'mini',      
+    NORMAL: 'normal',  
+    BIGGER: 'bigger', 
+    '400x400': '400x400',
 }
 
 /**
@@ -28,14 +31,38 @@ const CDN_TWITTER_IMG_SIZE = {
  * Note that some images may not have optimized URL variants.
  */
 export function getSizeOptimizedImageUrl(originalUrl, desiredSize) {
-  ...
+  try {
+    if (!originalUrl) return '';
+
+    if (originalUrl.startsWith(CDN_WISATA_URL)) {
+      return originalUrl.replace(/(\.[^.]+)$/, `_${desiredSize}$1`);
+    }
+
+    if (originalUrl.startsWith(CDN_TWITTER_URL)) {
+      return originalUrl.replace(/_(normal|bigger|mini|400x400)(\.\w+)$/, `_${desiredSize}$2`);
+    }
+
+    return originalUrl;
+  } catch (error) {
+    console.error('Error optimizing image URL:', error);
+    return originalUrl;
+  }
 }
 
 /**
  * TASK: Extracts SEO attributes from diary content
  */
 export function getDiaryContentSEOAttributes(contentData) {
-  ...
+    if (!contentData) return {};
+
+  const { title, description, image, tags } = contentData;
+
+  return {
+    title: title || '',
+    description: description || '',
+    image: image || '',
+    tags: Array.isArray(tags) ? tags : [],
+  };
 }
 
 /**
@@ -49,6 +76,14 @@ export function getDiaryContentSEOAttributes(contentData) {
  * - \<TiktokEmbed />
  * - \<TwitterEmbed />
  */
-export function renderDiaryContent(contentData) {
-  ...
+export function renderDiaryContent(mdxSource) {
+  if (!mdxSource) return null;
+  const components = { YoutubeEmbed, InstagramEmbed, TiktokEmbed, TwitterEmbed };
+  return <MDXRemote {...mdxSource} components={components} />;
+}
+
+export default {
+  CDN_TWITTER_URL,
+  CDN_WISATA_URL,
+  CDN_WISATA_IMG_SIZE,
 }
