@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { FaShare, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { getDiaryFeed } from "../../../api/cms";
 import { getSizeOptimizedImageUrl } from "../../../utils/cms";
 import { useRouter } from "next/navigation";
@@ -108,9 +108,9 @@ export default function Card({ feed: feedProp, initialIndex = 0, onNavigate }) {
 
         {/* Share Button & Dropdown */}
         <ShareButton shareUrl={shareUrl} shareTitle={shareTitle} position="top" />
-        {selectedEmbed === 'instagram' && <div className="mt-4"><InstagramEmbed /></div>}
-        {selectedEmbed === 'tiktok' && <div className="mt-4"><TiktokEmbed /></div>}
-        {selectedEmbed === 'twitter' && <div className="mt-4"><TwitterEmbed /></div>}
+        {selectedEmbed === 'instagram'}
+        {selectedEmbed === 'tiktok'}
+        {selectedEmbed === 'twitter'  }
       </div>
 
       <button
